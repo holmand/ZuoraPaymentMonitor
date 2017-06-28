@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="30" />
+
+    <title>Zuora Payment Monitor</title>
+
+    <link     href='http://fonts.googleapis.com/css?family=Sintony:400,700'     rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+      body
+      {
+        background-color:#000;
+      }
+
+      h1
+      {
+        font-size:34px;
+        margin-top:0;
+        font-family:Arial, sans-serif;
+        text-shadow:2px 0 15px #292929;
+        letter-spacing:4px;
+        text-decoration:none;
+        color:#DDD;
+      }
+      h2
+      {
+        font-size:24px;
+        margin-top:0;
+        font-family:Arial, sans-serif;
+        letter-spacing:4px;
+        text-decoration:none;
+        color:#DDD;
+      }
+      ul
+      {
+        list-style: none;
+        text-align: left;
+      }
+      .page-bg
+      {
+        text-align:center;
+      }
+      .mainContent
+      {
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        color:#DDD;
+      }
+      #wrap
+      {
+         width:1000px;
+         margin:0 auto;
+      }
+      #left_col
+      {
+         float:left;
+         width:500px;
+      }
+      #right_col
+      {
+         float:right;
+         width:500px;
+      }
+    </style>
+
+  </head>
+
+  <body class="page-bg">
+    <div class="mainContent">
+      <h1>Zuora - Payment Monitor</h1>
+      <p>
+        <h2>{{ totalCount }} Payments = ${{ grandTotal }}</h2>
+      </p>
+      <div id="wrap">
+        <div id="left_col">
+          <h2>{{ payrunCount }} auto-renewals = ${{payrunTotal}}</h2>
+
+          <ul>
+            {% for accountid, account in payrun_accounts_dic.items()  %}
+              <li>{{ account['name']}} ({{account['customer_id']}}) = ${{account['amount']}}</li>
+            {% endfor %}
+          </ul>
+
+        </div>
+        <div id="right_col">
+          <h2>{{ apiCount }} purchases = ${{apiTotal}}</h2>
+          <ul>
+            {% for accountid, account in api_accounts_dic.items()  %}
+              <li>{{ account['name']}} ({{account['customer_id']}}) = ${{account['amount']}}</li>
+            {% endfor %}
+          </ul>
+      </div>
+    </div>
+    </div>
+
+    {% if play_sound %}
+    <audio autoplay>
+      <source src="/static/cash-register.mp3" type="audio/mpeg">
+    </audio>
+    {% endif %}
+
+  </body>
+</html>

@@ -91,7 +91,22 @@ def query():
                 api_accounts_dic[accountid] = account_basic
 
     grandTotal = apiTotal + payrunTotal
-    return render_template('index.html', play_sound=play_sound, totalCount=length, payrunCount=payrunCount, apiCount=apiCount, grandTotal=grandTotal, payrunTotal=payrunTotal, apiTotal=apiTotal, payrun_accounts_dic=payrun_accounts_dic, api_accounts_dic=api_accounts_dic)
+
+    model = {
+        "effective_date" : effective_date,
+        "play_sound" : play_sound,
+        "totalCount" : length,
+        "payrunCount" : payrunCount,
+        "apiCount" : apiCount,
+        "grandTotal" : grandTotal,
+        "payrunTotal" : payrunTotal,
+        "apiTotal" : apiTotal,
+        "payrun_accounts_dic" : payrun_accounts_dic,
+        "api_accounts_dic" : api_accounts_dic
+    }
+
+    #return render_template('index.html', play_sound=play_sound, totalCount=length, payrunCount=payrunCount, apiCount=apiCount, grandTotal=grandTotal, payrunTotal=payrunTotal, apiTotal=apiTotal, payrun_accounts_dic=payrun_accounts_dic, api_accounts_dic=api_accounts_dic)
+    return render_template('index.html', model=model)
 
 def getcustomer(accountid):
     # TODO: Don't make call if we don't have an AccountId
